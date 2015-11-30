@@ -371,6 +371,10 @@
     assert.ok(!_.every({a: 1, b: 2, c: 3, d: 4}, _.isObject), 'takes objects');
     assert.ok(_.every(['a', 'b', 'c', 'd'], _.hasOwnProperty, {a: 1, b: 2, c: 3, d: 4}), 'context works');
     assert.ok(!_.every(['a', 'b', 'c', 'd', 'f'], _.hasOwnProperty, {a: 1, b: 2, c: 3, d: 4}), 'context works');
+
+    var callCount = 0;
+    _.every([1, 1, 0, 1], function(n) { callCount++; return !!n; });
+    assert.equal(callCount, 3, 'stops after the first unsuccessful truth test');
   });
 
   test('all', function(assert) {
@@ -401,6 +405,10 @@
     assert.ok(!_.some({a: 1, b: 2, c: 3, d: 4}, _.isObject), 'takes objects');
     assert.ok(_.some(['a', 'b', 'c', 'd'], _.hasOwnProperty, {a: 1, b: 2, c: 3, d: 4}), 'context works');
     assert.ok(!_.some(['x', 'y', 'z'], _.hasOwnProperty, {a: 1, b: 2, c: 3, d: 4}), 'context works');
+
+    var callCount = 0;
+    _.some([0, 0, 1, 0], function(n) { callCount++; return !!n; });
+    assert.equal(callCount, 3, 'stops after the first successful truth test');
   });
 
   test('any', function(assert) {
