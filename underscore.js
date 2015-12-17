@@ -598,7 +598,7 @@
     var result = Array(length);
 
     for (var index = 0; index < length; index++) {
-      result[index] = _.pluck(array, index);
+      result[index] = _.map(array, index);
     }
     return result;
   };
